@@ -33,21 +33,25 @@
     <script>
         showNone();
 
+        function createSquareHtml(onclickFunctionName, imageFileName) {
+            let html = '<div';
+            if(onclickFunctionName){
+                html += ` onclick="${onclickFunctionName}()"`;
+            }
+            html += '>';
+            if (imageFileName) {
+                html += `<img src="img/${imageFileName}.jpg"/>`;
+            }
+            html += '</div>';
+            return html;            
+        }
+
         function showNone() {
-            document.getElementById('board').innerHTML = /*HTML*/`
-                <div onclick="showDog1()"></div>
-                <div></div>
-                <div></div>
-                <div></div>        
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>        
-                <div></div>
-                <div onclick="showDog2()"></div>
-                <div></div><div></div>        
-                <div></div><div></div><div></div><div></div>        
-            `;
+            document.getElementById('board').innerHTML =
+                createSquareHtml('showDog1', '')
+                + createSquareHtml().repeat(8)
+                + createSquareHtml('showDog2', '')
+                + createSquareHtml().repeat(6)
         }
 
         function showDog1() {
